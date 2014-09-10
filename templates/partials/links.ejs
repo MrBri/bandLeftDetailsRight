@@ -1,0 +1,11 @@
+<% if (bandNames.length) { %>
+  <div class="col-xs-5 col-sm-4 nopadding">
+    <ul class="nav nav-pills nav-stacked nopadding">
+      <% bandNames.forEach(function(name, i) {  %>
+        <li <% if (bandId === (i)) { %>class="active"<% } %>>
+          <a href="/bands/<%= i + 1 %>"><%= name %></a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>

@@ -1,0 +1,33 @@
+{
+  "name": "bandLeftDetailsRight",
+  "version": "1.0.0",
+  "description": "a page that renders a list of the bands on the left, and when a band name is clicked, the details of that band are displayed to the right of the list.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrBri/bandLeftDetailsRight.git"
+  },
+  "keywords": [
+    "hapi",
+    "ejs",
+    "bootstrap"
+  ],
+  "author": "Tyler Briles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrBri/bandLeftDetailsRight/issues"
+  },
+  "homepage": "https://github.com/MrBri/bandLeftDetailsRight",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "hapi": "^6.8.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-livereload": "^2.1.1",
+    "gulp-nodemon": "^1.0.4"
+  }
+}
