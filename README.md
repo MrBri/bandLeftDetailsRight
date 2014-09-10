@@ -1,5 +1,7 @@
 bandLeftDetailsRight
 ====================
+### Requirements
+[Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager) v0.10.30 or newer
 
 ### To run locally
 1. `git clone git@github.com:MrBri/bandLeftDetailsRight.git`
