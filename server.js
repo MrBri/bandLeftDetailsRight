@@ -1,5 +1,8 @@
 var Hapi = require('hapi'),
   bands = require('./bands.json'),
+  util = require('util'),
+  redis = require('redis'),
+  client = redis.createClient(),
   bandNames = [],
 
   options = {
@@ -42,12 +45,39 @@ var Hapi = require('hapi'),
       bands[id - 1].year_formed = content;
     }
     bandInfo(request, reply, id);
-  };
+  },
 
-bands.forEach(function(band) {
-  bandNames.push(band.name);
+  membersSortedSet = function membersSortedSet(i, members) {
+    members.forEach(function(member, j) {
+      client.zadd('members:' + i, j, member.name, redis.print);
+    });
+  };
+/* End of variable declaration     */
+
+/* ******** redis events ********* */
+client.on('error', function(err) {
+  console.log('Error ' + err);
 });
 
+// monitor causing redis to crash in my situation
+
+// client.monitor(function(err, res) {
+//     console.log("Entering monitoring mode.");
+// });
+
+// client.on("monitor", function(time, args) {
+//     console.log(time + ": " + args);
+// });
+
+bands.forEach(function(band, i) {
+  bandNames.push(band.name);
+
+  // Adding json to database
+  client.hmset('band:' + i, 'name', band.name, 'year_formed', band.year_formed, redis.print);
+  membersSortedSet(i, band.members);
+});
+
+/* ************* hapi ************* */
 server.route([
   { path: '/', method: 'GET', handler: links },
   { path: '/bands/{id}', method: 'GET', handler: bandDetails },
@@ -66,4 +96,7 @@ server.on('internalError', function(request, err) {
 
 server.start(function() {
   console.log('Hapi version:', Hapi.version, ' Started:', server.info.uri);
+  client.zrange('members:3', 0, -1, function(err, results) {
+    console.log('members:3', util.inspect(results));
+  });
 });

@@ -23,7 +23,8 @@
   "homepage": "https://github.com/MrBri/bandLeftDetailsRight",
   "dependencies": {
     "ejs": "^1.0.0",
-    "hapi": "^6.8.1"
+    "hapi": "^6.8.1",
+    "redis": "^0.12.1"
   },
   "devDependencies": {
     "gulp": "^3.8.8",
