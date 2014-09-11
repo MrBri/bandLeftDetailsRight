@@ -11,3 +11,10 @@ bandLeftDetailsRight
 
 ### Approach
 First got things working by using bootstrap's javascript tabs but that was basically a single page app then refactored ejs to partials and hapi's layout option.
+
+### To Do
+- Use a DB
+- Ability to add bands
+- Edit band name
+- user auth
+- Deploy

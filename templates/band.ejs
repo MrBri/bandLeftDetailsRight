@@ -2,12 +2,14 @@
   <div id="<%= bandId %>">
     <dl class="dl-horizontal">
       <dt>Year formed</dt>
-      <dd><%= bandYear %></dd>
+      <dd data-band-id="<%= bandId %>" contenteditable="true"><%= bandYear %></dd>
       <dt>Members</dt>
       <dd>
         <ul class="list-unstyled">
-        <% bandMembers.forEach(function(member) { %>
-          <li><%= member.name %></li>
+        <% bandMembers.forEach(function(member, i) { %>
+          <li data-band-id="<%= bandId %>" data-member-id="<%= i %>" contenteditable="true">
+            <%= member.name %>
+          </li>
         <% }) %>
         </ul>
       </dd>

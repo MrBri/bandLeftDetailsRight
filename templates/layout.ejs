@@ -31,5 +31,45 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    'use strict';
+    var $editing, band = {};
+    $('[contenteditable=true]').blur(function(e) {
+      $editing = $(this);
+      band.id = $editing.data('band-id');
+      band.content = this.innerHTML;
+      if ($editing.data('member-id') !== undefined) {
+        band.memberId = $editing.data('member-id');
+      }
+
+      $editing.popover({
+        placement: 'bottom',
+        title: 'Save changes?',
+        content: '<%- include partials/popover %>',
+        html: true
+      });
+
+      $(this).popover('show');
+    });
+
+    $('.dl-horizontal')
+      .on('click touchstart', '.no-save', function() {
+        $editing.popover('hide');
+      })
+      .on('click touchstart', '.save', function() {
+        var btn = $(this);
+        btn.button('loading');
+        $.post('/bands/' + band.id + '/edit', band)
+          .done(function() {
+            btn.button('saved');
+            $('.no-save').button('done');
+          })
+          .fail(function() {
+            btn.button('failed');
+          });
+      });
+  });
+  </script>
 </body>
 </html>
