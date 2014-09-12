@@ -8,7 +8,7 @@
         <ul class="list-unstyled">
         <% bandMembers.forEach(function(member, i) { %>
           <li data-band-id="<%= bandId %>" data-member-id="<%= i %>" contenteditable="true">
-            <%= member.name %>
+            <%= member %>
           </li>
         <% }) %>
         </ul>
