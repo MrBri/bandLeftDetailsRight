@@ -10,17 +10,17 @@
         <form role="form">
           <div class="form-group">
             <label for="inputName">Band Name</label>
-            <input type="email" class="form-control" id="inputName" placeholder="Greatful Dead">
+            <input name="name" type="text" class="form-control" id="inputName" placeholder="Grateful Dead">
           </div>
           <div class="form-group">
             <label for="inputYear">Year formed</label>
-            <input type="password" class="form-control" id="inputYear" placeholder="1965">
+            <input name="year_formed" type="text" class="form-control" id="inputYear" placeholder="1965">
           </div>
           <div class="form-group">
             <label for="inputMembers">Members</label>
-            <textarea class="form-control" id="inputMember" rows="3" placeholder="Be sure to put each member on a new line"></textarea>
+            <textarea name="members" class="form-control" id="inputMember" rows="3" placeholder="Be sure to put each member on a new line"></textarea>
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default" formaction="/create" formmethod="post">Submit</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </form>
 

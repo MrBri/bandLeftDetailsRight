@@ -39,7 +39,9 @@
   <script>
   $(document).ready(function() {
     'use strict';
-    var $editing, band = {};
+    var $editing, band = { content: '' };
+
+    // start save dialog on blur
     $('.bands').on('blur', '[contenteditable=true]', function(e) {
       $editing = $(this);
       band.id = $editing.data('band-id');
@@ -61,6 +63,7 @@
       $(this).popover('show');
     });
 
+    // to POST or not to POST, that is the question
     $('.bands')
       .on('click touchstart', '.no-save', function() {
         $editing.popover('hide');
@@ -78,8 +81,20 @@
           });
       });
 
-    $('.editTitle').on('click touchstart', function(e) {
+    // edit the active title
+    $('.editTitle').on('click touchstart', function() {
       $('.active').attr('contenteditable', 'true');
+    });
+
+    // delete the active band
+    $('.deleteBand').on('click touchstart', function() {
+      var $active = $('.active');
+      band.id = $active.data('band-id');
+      band.toDelete = true;
+
+      $.post('/bands/' + band.id + '/edit', band)
+        .done(function() { $active.remove(); });
+      band = {};
     });
   });
   </script>
