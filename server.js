@@ -1,8 +1,8 @@
 var Hapi = require('hapi'),
   bands = require('./bands.json'),
   util = require('util'),
+  url = require('url'),
   redis = require('redis'),
-  client = redis.createClient(),
   bandNames = [],
   bandId,
 
@@ -112,6 +112,15 @@ var Hapi = require('hapi'),
       client['hset' + nx]('members:' + i, j, member.name || member, redis.print);
     });
   };
+
+if (process.env.REDISCLOUD_URL) {
+  var redisURL = url.parse(process.env.REDISCLOUD_URL),
+    client = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
+
+  client.auth(redisURL.auth.split(":")[1]);
+} else {
+  var client = redis.createClient();
+}
 /*   End of variable declaration   */
 
 client.on('error', function(err) {
