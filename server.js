@@ -1,4 +1,3 @@
-'use strick';
 var Hapi = require('hapi'),
   bands = require('./bands.json'),
   util = require('util'),
@@ -77,10 +76,15 @@ var Hapi = require('hapi'),
       arrId = id - 1,
       content = request.payload.content.trim();
 
-    if (request.payload.memberId) { // either inputing a member or year form
-      client.hset('members:' + arrId, request.payload.memberId, content);
+    if (request.payload.memberId) { // either inputing a member, band name or year
+      client.hset('members:' + arrId, request.payload.memberId, content, redis.print);
+    } else if (request.payload.isBandName) {
+
+      client.hset('band:' + arrId, 'name', content, redis.print);
+      client.hset('bands', arrId, content, redis.print);
+      bandNames = []; // grab band names on next display
     } else {
-      client.hset('band:' + arrId, 'year_formed', content);
+      client.hset('band:' + arrId, 'year_formed', content, redis.print);
     }
     bandInfo(request, reply, id);
   },

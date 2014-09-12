@@ -1,5 +1,8 @@
 bandLeftDetailsRight
 ====================
+
+![](http://g.recordit.co/iWs9LZgi6d.gif)
+
 ### Requirements
 [Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager) v0.10.30 or newer
 [redis](http://redis.io/download) `brew install redis`
@@ -18,7 +21,6 @@ Next using HTML5's contenteditable to allow inline editing on band details POSTi
 Trying out redis's key/value and data structures
 
 ### To Do
-- Ability to add bands
-- Edit band name
+- POST new band
+- deploy
 - user auth
-- Deploy

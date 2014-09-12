@@ -42,6 +42,7 @@
     "require": true,
     "TEMPLATE": true,
     "Handlebars": true,
-    "s7sdk": true
+    "s7sdk": true,
+    "process": true
   }
 }
